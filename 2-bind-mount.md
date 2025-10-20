@@ -16,22 +16,26 @@ docker run -d --name <nombre contenedor> --mount type=bind,source=<ruta carpeta 
 
 ### Crear un contenedor con la imagen nginx:alpine, mapear todos por puertos, para la ruta carpeta host colocar el directorio en donde se encuentra la carpeta html en tu computador y para la ruta carpeta contenedor: /usr/share/nginx/html (esta ruta se obtiene al revisar la documentación de la imagen)
 ![Volúmenes](volumen-host.PNG)
-# COMPLETAR CON EL COMANDO
+# docker run -d --name nginx-bind \
+# -p 80:80 \
+# -v /ruta/completa/nginx/html:/usr/share/nginx/html \
+# nginx:alpine
 
 ### ¿Qué sucede al ingresar al servidor de nginx?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+# Se muestra el contenido de la carpeta html del host. Como está vacía, al ingresar desde el navegador (http://localhost) aparece un error 403 (Forbidden) porque no hay un index.html que servir.
 
 ### ¿Qué pasa con el archivo index.html del contenedor?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+# El archivo index.html original de la imagen de Nginx queda oculto, ya que el bind mount sobreescribe el contenido del directorio /usr/share/nginx/html con el contenido de la carpeta html del host.
 
 ### Ir a https://html5up.net/ y descargar un template gratuito, descomprirlo dentro de tu computador en la carpeta html
 ### ¿Qué sucede al ingresar al servidor de nginx?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+# El servidor Nginx sirve automáticamente el nuevo index.html que está dentro de la carpeta html del host. Al ingresar al navegador (http://localhost) se visualiza el template descargado.
+
 
 ### Eliminar el contenedor
-# COMPLETAR CON EL COMANDO
+# docker rm -f nginx-bind
 
 ### ¿Qué sucede al crear nuevamente un contenedor montado al directorio definidos anteriormente?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+# El contenido del template sigue disponible en la carpeta html del host, por lo que al crear un nuevo contenedor montando el mismo directorio el servidor Nginx vuelve a mostrar automáticamente el sitio web sin necesidad de volver a copiar los archivos.
 
 
